@@ -31,24 +31,28 @@
     </div>  
 <script >
 
-    var peso = parseInt(document.getElementById("weight").value);
-    var sup = parseInt(document.getElementById("sup").value);
-    var def = parseInt(document.getElementById("def").value) * -1;
     var macros = document.querySelectorAll("li");
     var button = document.getElementById("st");
-    var protes = peso * 2;
-    var protesC = protes * 4;
-    var calorias = (peso*22*1.6);
-
-    var prueba = 0;
-
+    
 
     button.addEventListener("click", function(){
 
-        sup = parseInt(document.getElementById("sup").value);
-        def = parseInt(document.getElementById("def").value) * -1;
+        var peso = parseInt(document.getElementById("weight").value);
+        var sup = parseInt(document.getElementById("sup").value);
+        var inputSup = document.getElementById("sup").textLength;
+        var def = parseInt(document.getElementById("def").value) * -1;
+        var inputDef = document.getElementById("def").textLength;
+        var protes = peso * 2;
+        var protesC = protes * 4;
+        var calorias = (peso*22*1.6);
 
-        if(macros[4].innerHTML.includes("k")){
+        if(document.getElementById("weight").textLength == 0){
+            alert("No te olvides de tu peso");
+        }
+        if((inputSup > 0) && (inputDef > 0) ){
+            alert("solo pone una opcion")
+        }
+        else if(macros[4].innerHTML.includes("k")){
             macros.forEach(i => {
                 if(i.innerHTML.includes("Peso:")){
                     i.innerHTML = "Peso:";
@@ -68,7 +72,7 @@
             });
         }
   
-        if (sup >= 0){
+        else if (sup >= 0){
             let grasas = (calorias + sup)/36;
             let grasasC = grasas * 9;
             let hidratosC = calorias - protesC - grasasC + sup;
@@ -94,7 +98,7 @@
         
         }
 
-        else if(def <= 0){
+        else if(def <= 0 ){
             let grasas = (calorias + def)/36;
             let grasasC = grasas * 9;
             let hidratosC = calorias - protesC - grasasC + def;
@@ -122,6 +126,10 @@
 
         else if(def > 0){
             alert("Pone un valor positivo en Deficit");
+        }
+
+        else if(sup < 0 ){
+            alert("Pone un valor positivo en SuperHabit");
         }
 
         else{
