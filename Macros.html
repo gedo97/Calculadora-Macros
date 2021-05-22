@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peso</title>
+</head>
+<style>
+    .input{
+        margin:2px;
+    }
+</style>
+<body>
+    <div class="container">
+        <header>
+            <h1>Calculadora de Macros</h1> 
+            Introduce tu peso:<input type="text" id="weight" class="input"> <br>
+            Superhabit de: <input type="text" id="sup" class="input"> <br>
+            Deficitc de: <input type="text" id="def"  class="input"> <br>
+            <input type="button" value="Send" id="st">  
+        </header>
+
+        <ul>
+            <li class="macro">Peso:</li>
+            <li class="macro">Protes:</li>
+            <li class="macro">Grasas:</li>
+            <li class="macro">Hidratos:</li>
+            <li class="macro">Calorias:</li>
+        </ul>        
+    </div>  
+<script >
+
+    var peso = parseInt(document.getElementById("weight").value);
+    var sup = parseInt(document.getElementById("sup").value);
+    var def = parseInt(document.getElementById("def").value) * -1;
+    var macros = document.querySelectorAll("li");
+    var button = document.getElementById("st");
+    var protes = peso * 2;
+    var protesC = protes * 4;
+    var calorias = (peso*22*1.6);
+
+    var prueba = 0;
+
+
+    button.addEventListener("click", function(){
+
+        sup = parseInt(document.getElementById("sup").value);
+        def = parseInt(document.getElementById("def").value) * -1;
+
+        if(macros[4].innerHTML.includes("k")){
+            macros.forEach(i => {
+                if(i.innerHTML.includes("Peso:")){
+                    i.innerHTML = "Peso:";
+                }
+                if(i.innerHTML.includes("Protes:")){
+                    i.innerHTML = "Protes:";
+                }
+                if(i.innerHTML.includes("Grasas:")){
+                    i.innerHTML = "Grasas:";
+                }
+                if(i.innerHTML.includes("Hidratos:")){
+                    i.innerHTML = "Hidratos:";
+                }
+                if(i.innerHTML.includes("Calorias:")){
+                    i.innerHTML = "Calorias:";
+                }
+            });
+        }
+  
+        if (sup >= 0){
+            let grasas = (calorias + sup)/36;
+            let grasasC = grasas * 9;
+            let hidratosC = calorias - protesC - grasasC + sup;
+            let hidratos = hidratosC/4; 
+            
+            macros.forEach(i => {
+                if(i.innerHTML.includes("Peso:")){
+                    i.innerHTML = "Peso:" + " " + parseInt(peso) + "kg";
+                }
+                if(i.innerHTML.includes("Protes:")){
+                    i.innerHTML = "Protes:" + " "+ parseInt(protes) + "g" + " (" + parseInt(protesC) + "kcal" + ")";
+                }
+                if(i.innerHTML.includes("Grasas:")){
+                    i.innerHTML = "Grasas:" + " " + parseInt(grasas) + "g" + " (" + parseInt(grasasC) + "kcal" + ")";
+                }
+                if(i.innerHTML.includes("Hidratos:")){
+                    i.innerHTML = "Hidratos:" + " " + parseInt(hidratos) + "g" + " (" + parseInt(hidratosC) + "kcal" + ")";
+                }
+                if(i.innerHTML.includes("Calorias:")){
+                    i.innerHTML = "Calorias:" + " " + parseInt(calorias) + "kcal";
+                }
+            });
+        
+        }
+
+        else if(def <= 0){
+            let grasas = (calorias + def)/36;
+            let grasasC = grasas * 9;
+            let hidratosC = calorias - protesC - grasasC + def;
+            let hidratos = hidratosC/4; 
+            
+            macros.forEach(i => {
+                if(i.innerHTML.includes("Peso:")){
+                    i.innerHTML = "Peso:" + " " + parseInt(peso) + "kg";
+                }
+                if(i.innerHTML.includes("Protes:")){
+                    i.innerHTML = "Protes:" + " "+ parseInt(protes) + "g" + " (" + parseInt(protesC) + "kcal" + ")";
+                }
+                if(i.innerHTML.includes("Grasas:")){
+                    i.innerHTML = "Grasas:" + " " + parseInt(grasas) + "g" + " (" + parseInt(grasasC) + "kcal" + ")";
+                }
+                if(i.innerHTML.includes("Hidratos:")){
+                    i.innerHTML = "Hidratos:" + " " + parseInt(hidratos) + "g" + " (" + parseInt(hidratosC) + "kcal" + ")";
+                }
+                if(i.innerHTML.includes("Calorias:")){
+                    i.innerHTML = "Calorias:" + " " + parseInt(calorias) + "kcal";
+                }
+            });
+           
+        }
+
+        else if(def > 0){
+            alert("Pone un valor positivo en Deficit");
+        }
+
+        else{
+            alert("Pone algo (? ");
+        }
+
+    })
+
+</script>
+</body>
+</html>
